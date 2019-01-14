@@ -1,0 +1,52 @@
+﻿@model IEnumerable<Jopoffers.Models.JopsView>
+
+@{
+    ViewBag.Title = "GetJopsByPublisher";
+    Layout = "~/Views/Shared/_MainLayout.cshtml";
+}
+
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-12 text-right" dir="rtl">
+            @foreach (var gr in Model)
+            {
+                <h5 class="mt-3">@gr.JopTitle</h5>
+                <table class="table mt-3 table-bordered">
+                    <thead>
+                        <tr>
+                            <th>
+                                اسم الباحث
+                            </th>
+                            <th>
+                                الرسالة
+                            </th>
+                            <th>
+                                تاريخ الارسال
+                            </th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+                    @foreach (var item in gr.Items)
+                    {
+                        <tr>
+                            <td>
+                                @item.user.UserName
+                            </td>
+                            <td>
+                                @item.message
+                            </td>
+                            <td>
+                                @item.ApplyDate
+                            </td>
+                        </tr>
+                    }
+
+                    </tbody>
+                </table>
+            }
+     
+        </div>
+    </div>
+</div>

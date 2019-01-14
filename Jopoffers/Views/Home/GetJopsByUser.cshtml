@@ -1,0 +1,52 @@
+﻿@model IEnumerable<Jopoffers.Models.ApplyForJop>
+
+@{
+    ViewBag.Title = "GetJopsByUser";
+    Layout = "~/Views/Shared/_MainLayout.cshtml";
+}
+
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-12 text-right" dir="rtl">
+
+            <h2>الوظائف المتقدم اليها</h2>
+            <table class="table">
+                <tr>
+                    <th>
+                        @Html.DisplayNameFor(model => model.jop.title)
+                    </th>
+
+                    <th>
+                        @Html.Label("الرسالة")
+                    </th>
+                    <th>
+                        @Html.Label("تاريخ التقدم")
+                    </th>
+                    <th></th>
+                </tr>
+
+                @foreach (var item in Model)
+            {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.jop.title)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.message)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.ApplyDate)
+                        </td>
+                        <td>
+                            @Html.ActionLink("تعديل", "Edit", new { id = item.Id }) |
+                            @Html.ActionLink("تفاصيل", "Detailsofjop", new { id = item.Id }) |
+                            @Html.ActionLink("حذف", "Delete", new { id = item.Id })
+                        </td>
+                    </tr>
+                }
+
+            </table>
+        </div>
+    </div>
+</div>

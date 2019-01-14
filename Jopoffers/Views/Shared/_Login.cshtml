@@ -1,0 +1,60 @@
+﻿@using Microsoft.AspNet.Identity
+@using WebApplication1.Models
+@if (Request.IsAuthenticated)
+{
+    using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoff" }))
+    {
+        var db = new ApplicationDbContext();
+        var UserId = User.Identity.GetUserId();
+
+        var currentUser = db.Users.Where(a => a.Id == UserId).SingleOrDefault();
+
+        @Html.AntiForgeryToken()
+        <ul class="navbar-nav mr-auto">
+@*
+    <li class="nav-item ml-auto">
+        <a class="nav-link" href="javascript:document.getElementById('logoff').submit()">خروج</a>
+    </li>
+
+    <li class="nav-item ml-auto">
+        @Html.ActionLink(User.Identity.GetUserName() + " مرحبا يا ", "Index", "Manage", new { @class = "nav-link" })
+    </li>
+*@
+            <li class="nav-item dropdown text-right" >
+                <a class="nav-link dropdown-toggle text-right" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" dir="rlt">
+                @currentUser.UserName
+                </a>
+                <div class="dropdown-menu text-right" aria-labelledby="navbarDropdown">
+                    @if (currentUser.UserType == "ناشر")
+                    {
+                        <a class="dropdown-item" href="~/Home/GetJopsByPublisher">الوظائف</a>
+                        <a class="dropdown-item" href="~/jops/create">انشاء وظيفة</a>
+                    }
+                    else
+                    {
+                        <a class="dropdown-item" href="~/Home/GetJopsByUser">الوظائف</a>
+                    }
+
+                    <a class="dropdown-item" href="~/Account/EditProfileAccount">تعديل الحساب</a>
+                    <div class="dropdown-divider"></div>
+                    <a class="dropdown-item" href="javascript:document.getElementById('logoff').submit()">خروج</a>
+                </div>
+            </li>
+        </ul>
+
+    }
+
+
+
+}
+else
+{
+    <ul class="navbar-nav mr-auto">
+        <li class="nav-item ml-auto">
+            <a class="nav-link" href="~/Account/Register"> اشتراك <i class="fas fa-lock"></i></a>
+        </li>
+        <li class="nav-item ml-auto">
+            <a class="nav-link" href="~/Account/Login">تسجيل الدخول <i class="fas fa-user"></i></a>
+        </li>
+    </ul>
+}

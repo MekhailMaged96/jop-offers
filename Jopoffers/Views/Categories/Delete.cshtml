@@ -1,0 +1,48 @@
+﻿@model Jopoffers.Models.Category
+
+@{
+    ViewBag.Title = "حذف";
+    Layout = "~/Views/Shared/_MainLayout.cshtml";
+}
+
+
+<div class="offset-md-2 col-md-8 ">
+    <section class="category-all text-right" dir="rtl">
+        <h2>حذف</h2>
+
+        <h3>  هل انت متاكد انك تريد حذف هذا النوع</h3>
+        <div>
+        
+            <hr />
+            <dl class="dl-horizontal">
+                <dt>
+                    @Html.DisplayNameFor(model => model.Name)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.Name)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.Description)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.Description)
+                </dd>
+
+            </dl>
+
+            @using (Html.BeginForm())
+            {
+                @Html.AntiForgeryToken()
+
+                <div class="form-actions no-color">
+                    <input type="submit" value="تاكيد الحذف" class="btn btn-danger btn-sm" /> |
+                    @Html.ActionLink("عودة الى القائمة", "Index")
+                </div>
+            }
+        </div>
+    </section>
+</div>
+      

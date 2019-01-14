@@ -1,0 +1,36 @@
+﻿@model IEnumerable<Jopoffers.Models.Jop>
+
+@{
+    ViewBag.Title = "Search";
+    Layout = "~/Views/Shared/_MainLayout.cshtml";
+}
+<div class="container">
+    <div class="row justify-content-end">
+        @foreach (var item in Model)
+        {
+            <div class="col-md-8 text-right  mt-4">
+                <div class="card">
+                    <div class="card-header">
+               نتائج البحث          
+                    </div>
+                    <div class="card-body">
+                        <p>@Html.DisplayFor(model => item.title)</p>
+                        <hr />
+          
+                        
+
+                            <h5>@Html.DisplayFor(model => item.title)</h5>
+                            <p>@Html.DisplayFor(model => item.content)</p>
+                            <img src="~/Uploads/@item.image" class="img-responsive" width="100px;" height="100px;"></img>
+                            <br />
+                            @Html.ActionLink("تفاصيل", "Details", new { jopId = item.Id }, new { @class = "btn btn-primary btn-sm mt-3" })
+
+                        
+
+
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>

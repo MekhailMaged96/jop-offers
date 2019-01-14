@@ -1,0 +1,48 @@
+﻿*{
+
+    box-sizing:border-box;
+}
+html {
+
+  height:100%;
+}
+
+body {
+  height:100%;
+}
+footer{
+    width:100%;
+ 
+   text-align:right;
+   background-color:cornflowerblue;
+   padding-top:5px;
+  
+
+}
+footer h3 {
+   padding-bottom:2px;
+   font-family: "Times New Roman", Times, serif;
+
+}
+footer ul li a {
+    color:#fff;
+    font-family: Verdana, Helvetica, sans-serif;
+    font-weight:bold;
+    font-size:1.2em;
+    
+}
+footer ul li {
+  list-style:none;
+}
+footer ul li a:hover {
+    text-decoration:none;
+}
+.copy-right {
+
+    text-align:center;
+    background-color:#0c5c82;
+    color:#fff;
+    padding:5px;
+    width:100%;
+
+}

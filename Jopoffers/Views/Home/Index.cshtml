@@ -1,0 +1,60 @@
+﻿@model IEnumerable<Jopoffers.Models.Category>
+
+@{
+    ViewBag.Title = "Home Page";
+}
+
+ 
+<div class="container">
+    <div class="row justify-content-end">
+        @foreach(var item in Model) {
+        <div class="col-md-12 text-right  mt-4">
+            <div class="card">
+                <div class="card-header">
+                    <h4>@Html.DisplayFor(model => item.Name)</h4>
+                </div>
+                <div class="card-body">
+                    <div class="container">
+                        <div class="row justify-content-end">
+                            @if (item.jops.Count() > 0)
+                            {
+
+                            
+                          
+                            foreach (var subitem in item.jops)
+                            {
+                         
+                                    <div class="card-body">
+                                        <div class="col-md-8">
+                                            <p>@Html.DisplayFor(model => item.Description)</p>
+                                            <hr />
+
+
+
+                                            <h5>@Html.DisplayFor(model => subitem.title)</h5>
+                                            <p> @Html.Raw(HttpUtility.HtmlDecode(@Html.DisplayFor(model => subitem.content).ToString()))</p>
+                                            <img src="~/Uploads/@subitem.image" class="img-responsive" width="100px;" height="100px;"></img>
+                                            <br />
+                                            @Html.ActionLink("تفاصيل", "Details", new { jopId = subitem.Id }, new { @class = "btn btn-primary btn-sm mt-3" })
+
+
+                                        </div>
+                                    </div>
+
+                            }  
+                            }
+                            else
+                            {
+                            <h3>لا يوجد وظائف  لهذا النوع </h3>
+                            }
+                        </div>
+                    </div>
+                </div>
+
+
+
+            </div>
+        </div>
+        }
+    </div>
+</div>

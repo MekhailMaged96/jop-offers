@@ -1,0 +1,111 @@
+﻿@model Jopoffers.Models.Jop
+
+@{
+    ViewBag.Title = "تعديل الوظيفة";
+    Layout = "~/Views/Shared/_MainLayout.cshtml";
+}
+
+<div class="offset-md-2 col-md-8">
+    <section class="edit-catagory text-right" dir="rtl">
+        <h2 class="text-right">تعديل الوظيفة</h2>
+        <div class="alert alert-danger" id="error-div">
+
+            <span id="error-text"></span>
+        </div>
+
+   @using (Html.BeginForm("Edit", "Jops", FormMethod.Post, new { enctype = "multipart/form-data" }))
+   {
+            @Html.AntiForgeryToken()
+
+            <div class="form-horizontal">
+                
+                <hr />
+                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                @Html.HiddenFor(model => model.Id)
+                @Html.HiddenFor(model => model.image)
+                <div class="form-group">
+                    @Html.LabelFor(model => model.title, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.title, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.title, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.content, htmlAttributes: new { @class = "control-label col-md-5" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.content, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.content, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.image, htmlAttributes: new { @class = "control-label col-md-5" })
+                    <div class="col-md-10">
+                        <img src="~/Uploads/@Html.DisplayFor(model=>model.image)" class="img-thumbnail" height="300px;" width="300px;" />
+                        <input type="file" name="img"  id="img_upload" />
+                        @Html.ValidationMessageFor(model => model.image, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.CategoryId, "نوع الوظيفة", htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.DropDownList("CategoryId", null, htmlAttributes: new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.CategoryId, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="offset-md-2 col-md-10">
+                        <input type="submit" value="حفظ" class="btn btn-success"  id="save">
+                    </div>
+                </div>
+            </div>
+        }
+
+        <div>
+            @Html.ActionLink("العودة الى القائمة", "Index")
+        </div>
+    </section>
+</div>
+
+@section scripts {
+    
+    <script>
+        $(document).ready(function () {
+            $("#error-div").hide();
+            $("#save").click(function () {
+                /*
+                if ($("#img").val() == '') {
+                    $("#error-div").fadeIn();
+                    $("#error-text").append("يجب اختيار صورة للوظيفة");
+
+                    return false;
+                }
+                */
+                if ($("#img_upload").val() != "") {
+                   
+                   
+                    var file_name = document.getElementById("img_upload").value;
+                
+                    var extension = file_name.substr(file_name.lastIndexOf('.') + 1);
+                  
+                    var vaildexe = ['jpg', 'png', 'gif', 'bmp'];
+
+                    if ($.inArray(extension, vaildexe) == -1) {
+                        $("#error-div").fadeIn();
+                        $("#error-text").append("يجب اختيار صورة ");
+                        return false;
+                    }
+
+
+                }
+
+         });
+        });
+
+
+    </script>
+    
+    }
